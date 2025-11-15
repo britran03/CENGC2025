@@ -3,6 +3,7 @@ import zipfile
 import sys
 import os
 import base_cracker.cracker as cracker
+import base_cracker.completion as completion
 
 
 BANNER = r"""
@@ -54,6 +55,13 @@ def parse_args():
         help="Shift input by a certain offset, as in the caesar cipher",
     )
 
+    parser.add_argument(
+        "--orb",
+        "-o",
+        type=bool,
+        help="Consult the orb on what the code looks like and what techniques might be relevant"
+    )
+
     args = parser.parse_args()
     if not args.code:
         parser.error("Must provide code start with")
@@ -83,6 +91,9 @@ def main():
 
     if args.caesar:
         input_code = cracker.caesar_cipher(input_code, args.caesar)
+        print(input_code)
+        # For now, just do the cipher on its own. Eventually, would be good to input into the brute force search
+        return
 
     cracker.test_transformations(args.zip, args.code, args.depth)
 

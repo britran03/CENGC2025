@@ -1,6 +1,6 @@
 import zipfile
 from collections import deque
-import conversions as conv
+import base_cracker.conversions as conv
 
 
 def caesar_cipher(text: str, key: int) -> str:
@@ -107,7 +107,7 @@ def test_transformations(
                     tried_passwords.add(new_val)
                     new_history = history + [name]
                     queue.append((new_val, depth + 1, new_history))
-                    print(f"  -> Queued: {' -> '.join(new_history)}")
+                    print(f"Queued: {' '.join(new_history)}")
             except Exception:
                 continue
 

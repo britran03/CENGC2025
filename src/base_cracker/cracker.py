@@ -3,6 +3,29 @@ from collections import deque
 import conversions as conv
 
 
+def caesar_cipher(text: str, key: int) -> str:
+    """
+    Apply a Caesar cipher shift
+    """
+    result = []
+    key = key % 26  # Normalize key
+
+    for char in text:
+        if "A" <= char <= "Z":
+            shifted = chr((ord(char) - ord("A") + key) % 26 + ord("A"))
+            result.append(shifted)
+
+        elif "a" <= char <= "z":
+            shifted = chr((ord(char) - ord("a") + key) % 26 + ord("a"))
+            result.append(shifted)
+
+        else:
+            # Leave digits, punctuation, spaces as-is
+            result.append(char)
+
+    return "".join(result)
+
+
 def generate_conversions():
     """Defines a list of transformation functions to be applied."""
     # Each item is a tuple: (name_of_transformation, function_lambda)
